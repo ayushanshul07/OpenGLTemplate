@@ -8,11 +8,13 @@
 #ifndef VertexBuffer_hpp
 #define VertexBuffer_hpp
 
+#include <cstddef>
+
 class VertexBuffer{
 private:
     unsigned int m_RendererId;
 public:
-    VertexBuffer(const void* data, unsigned int size);
+    VertexBuffer(const void* data, size_t size);
     ~VertexBuffer();
     
     void Bind() const;

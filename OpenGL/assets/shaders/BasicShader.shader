@@ -1,5 +1,6 @@
 #shader vertex
-#version 330 core
+#version 300 es
+precision mediump float;
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aColor;
 layout (location = 2) in vec2 aTexCoord ;
@@ -14,7 +15,8 @@ void main()
 }
 
 #shader fragment    
-#version 330 core
+#version 300 es
+precision mediump float;
 out vec4 FragColor;
 
 in vec3 ourColor;

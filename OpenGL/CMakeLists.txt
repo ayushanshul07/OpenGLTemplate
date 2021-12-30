@@ -2,11 +2,6 @@ cmake_minimum_required(VERSION 3.0.0)
 project(webgl)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
-set(CMAKE_CXX_STANDARD 11)
-
-find_package(OpenGL REQUIRED)
-find_package(GLEW REQUIRED)
-find_package(glfw3 REQUIRED)
 
 set(SRC_FILES
     ${CMAKE_SOURCE_DIR}/src/Application.cpp
@@ -20,7 +15,23 @@ set(SRC_FILES
 
 add_executable(webgl ${SRC_FILES})
 
+set_target_properties(webgl PROPERTIES SUFFIX ".html" CXX_STANDARD 11)
+
 target_include_directories(webgl PUBLIC ${CMAKE_SOURCE_DIR}/include
                                         ${CMAKE_SOURCE_DIR}/include/vendor)
 
-target_link_libraries(webgl PUBLIC OpenGL::GL GLEW::GLEW glfw)
+target_link_libraries(webgl PUBLIC GL GLEW glfw)
+
+target_compile_options(webgl PUBLIC -g)
+target_link_options(
+  webgl
+  PUBLIC
+  -g
+  -sUSE_GLFW=3
+  -sGL_ASSERTIONS=1
+  -sGL_DEBUG=1
+  --preload-file
+  ../assets
+  -sMAX_WEBGL_VERSION=3
+  -sMIN_WEBGL_VERSION=3
+  -sFULL_ES3=1)

@@ -1,3 +1,5 @@
+#include <emscripten/emscripten.h>
+#include <functional>
 #define GL_SILENCE_DEPRECATION
 
 #include <iostream>
@@ -17,9 +19,9 @@
 #include "Texture.hpp"
 #include "Renderer.hpp"
 
-#include "../include/vendor/glm/glm.hpp"
-#include "../include/vendor/glm/gtc/matrix_transform.hpp"
-#include "../include/vendor/glm/gtc/type_ptr.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height){
     glViewport(0, 0, width, height);
@@ -30,6 +32,9 @@ void processInput(GLFWwindow* window){
         glfwSetWindowShouldClose(window, true);
     }
 }
+
+std::function<void()> loop;
+void main_loop() { loop(); }
 
 int main(void)
 {
@@ -65,8 +70,8 @@ int main(void)
     glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    Shader shader("/Users/ayushanshul07/OpenGLTemplate/OpenGL/assets/shaders/BasicShader.shader");
-    Texture texture("/Users/ayushanshul07/OpenGLTemplate/OpenGL/assets/textures/container.jpeg");
+    Shader shader("/assets/shaders/BasicShader.shader");
+    Texture texture("/assets/textures/container.jpeg");
 
     float vertices[] = {
             // positions // colors // texture coords
@@ -83,7 +88,7 @@ int main(void)
     
     VertexArray     VAO;
     VertexBuffer    VBO(vertices, sizeof(vertices));
-    IndexBuffer     IBO(indices, sizeof(indices));
+    IndexBuffer     IBO(indices, 6);
     
     VertexBufferLayout layout;
     layout.Push(GL_FLOAT, 3); // for position
@@ -98,8 +103,7 @@ int main(void)
     Renderer renderer;
     
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
+    loop = [&] {
         processInput(window);
 
         /* Render here */
@@ -120,8 +124,8 @@ int main(void)
         glfwSwapBuffers(window);
         /* Poll for and process events */
         glfwPollEvents();
-    }
-    
+    };
+    emscripten_set_main_loop(main_loop, 0, true);
     glfwTerminate();
     return 0;
 }
