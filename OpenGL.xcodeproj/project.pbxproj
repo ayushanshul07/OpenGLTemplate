@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9CE93CD3277C734200E77307 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE93CD2277C734200E77307 /* main.cpp */; };
+		9CE93CF2277C747F00E77307 /* VertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE93CE9277C747E00E77307 /* VertexBuffer.cpp */; };
+		9CE93CF3277C747F00E77307 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE93CEA277C747E00E77307 /* Renderer.cpp */; };
+		9CE93CF4277C747F00E77307 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE93CEC277C747E00E77307 /* Application.cpp */; };
+		9CE93CF5277C747F00E77307 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE93CED277C747E00E77307 /* Texture.cpp */; };
+		9CE93CF6277C747F00E77307 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE93CEE277C747E00E77307 /* Shader.cpp */; };
+		9CE93CF7277C747F00E77307 /* IndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE93CEF277C747E00E77307 /* IndexBuffer.cpp */; };
+		9CE93CF8277C747F00E77307 /* VertexArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE93CF0277C747E00E77307 /* VertexArray.cpp */; };
+		9CE93CF9277C747F00E77307 /* VertexBufferLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CE93CF1277C747E00E77307 /* VertexBufferLayout.cpp */; };
+		9CE93CFE277C751800E77307 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE93CFD277C751800E77307 /* OpenGL.framework */; };
+		9CE93D00277C755700E77307 /* libGLEW.2.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE93CFF277C755700E77307 /* libGLEW.2.2.0.dylib */; };
+		9CE93D02277C756900E77307 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE93D01277C756900E77307 /* libglfw.3.3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +34,29 @@
 
 /* Begin PBXFileReference section */
 		9CE93CCF277C734100E77307 /* OpenGL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL; sourceTree = BUILT_PRODUCTS_DIR; };
-		9CE93CD2277C734200E77307 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9CE93CE0277C742200E77307 /* IndexBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IndexBuffer.hpp; sourceTree = "<group>"; };
+		9CE93CE1277C743800E77307 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
+		9CE93CE2277C743800E77307 /* Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
+		9CE93CE3277C743800E77307 /* VertexArray.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexArray.hpp; sourceTree = "<group>"; };
+		9CE93CE4277C743800E77307 /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		9CE93CE5277C743800E77307 /* VertexBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexBuffer.hpp; sourceTree = "<group>"; };
+		9CE93CE6277C744C00E77307 /* VertexBufferElement.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexBufferElement.hpp; sourceTree = "<group>"; };
+		9CE93CE7277C744C00E77307 /* VertexBufferLayout.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexBufferLayout.hpp; sourceTree = "<group>"; };
+		9CE93CE8277C745F00E77307 /* vendor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = vendor; sourceTree = "<group>"; };
+		9CE93CE9277C747E00E77307 /* VertexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VertexBuffer.cpp; sourceTree = "<group>"; };
+		9CE93CEA277C747E00E77307 /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		9CE93CEB277C747E00E77307 /* vendor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = vendor; sourceTree = "<group>"; };
+		9CE93CEC277C747E00E77307 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
+		9CE93CED277C747E00E77307 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		9CE93CEE277C747E00E77307 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
+		9CE93CEF277C747E00E77307 /* IndexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IndexBuffer.cpp; sourceTree = "<group>"; };
+		9CE93CF0277C747E00E77307 /* VertexArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VertexArray.cpp; sourceTree = "<group>"; };
+		9CE93CF1277C747E00E77307 /* VertexBufferLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VertexBufferLayout.cpp; sourceTree = "<group>"; };
+		9CE93CFA277C74B100E77307 /* BasicShader.shader */ = {isa = PBXFileReference; lastKnownFileType = text; path = BasicShader.shader; sourceTree = "<group>"; };
+		9CE93CFB277C74BD00E77307 /* container.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = container.jpeg; sourceTree = "<group>"; };
+		9CE93CFD277C751800E77307 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		9CE93CFF277C755700E77307 /* libGLEW.2.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.2.0.dylib; path = ../../../usr/local/Cellar/glew/2.2.0_1/lib/libGLEW.2.2.0.dylib; sourceTree = "<group>"; };
+		9CE93D01277C756900E77307 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../usr/local/Cellar/glfw/3.3.6/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +64,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CE93D02277C756900E77307 /* libglfw.3.3.dylib in Frameworks */,
+				9CE93D00277C755700E77307 /* libGLEW.2.2.0.dylib in Frameworks */,
+				9CE93CFE277C751800E77307 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +78,7 @@
 			children = (
 				9CE93CD1277C734100E77307 /* OpenGL */,
 				9CE93CD0277C734100E77307 /* Products */,
+				9CE93CFC277C751800E77307 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +93,78 @@
 		9CE93CD1277C734100E77307 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				9CE93CD2277C734200E77307 /* main.cpp */,
+				9CE93CDB277C736000E77307 /* src */,
+				9CE93CDA277C735700E77307 /* include */,
+				9CE93CD9277C734D00E77307 /* assets */,
 			);
 			path = OpenGL;
+			sourceTree = "<group>";
+		};
+		9CE93CD9277C734D00E77307 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				9CE93CDE277C73B900E77307 /* textures */,
+				9CE93CDD277C73B000E77307 /* shaders */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		9CE93CDA277C735700E77307 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				9CE93CE8277C745F00E77307 /* vendor */,
+				9CE93CE6277C744C00E77307 /* VertexBufferElement.hpp */,
+				9CE93CE7277C744C00E77307 /* VertexBufferLayout.hpp */,
+				9CE93CE2277C743800E77307 /* Renderer.hpp */,
+				9CE93CE4277C743800E77307 /* Shader.hpp */,
+				9CE93CE1277C743800E77307 /* Texture.hpp */,
+				9CE93CE3277C743800E77307 /* VertexArray.hpp */,
+				9CE93CE5277C743800E77307 /* VertexBuffer.hpp */,
+				9CE93CE0277C742200E77307 /* IndexBuffer.hpp */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		9CE93CDB277C736000E77307 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				9CE93CEB277C747E00E77307 /* vendor */,
+				9CE93CEC277C747E00E77307 /* Application.cpp */,
+				9CE93CEF277C747E00E77307 /* IndexBuffer.cpp */,
+				9CE93CEA277C747E00E77307 /* Renderer.cpp */,
+				9CE93CEE277C747E00E77307 /* Shader.cpp */,
+				9CE93CED277C747E00E77307 /* Texture.cpp */,
+				9CE93CF0277C747E00E77307 /* VertexArray.cpp */,
+				9CE93CE9277C747E00E77307 /* VertexBuffer.cpp */,
+				9CE93CF1277C747E00E77307 /* VertexBufferLayout.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		9CE93CDD277C73B000E77307 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				9CE93CFA277C74B100E77307 /* BasicShader.shader */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
+		9CE93CDE277C73B900E77307 /* textures */ = {
+			isa = PBXGroup;
+			children = (
+				9CE93CFB277C74BD00E77307 /* container.jpeg */,
+			);
+			path = textures;
+			sourceTree = "<group>";
+		};
+		9CE93CFC277C751800E77307 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9CE93D01277C756900E77307 /* libglfw.3.3.dylib */,
+				9CE93CFF277C755700E77307 /* libGLEW.2.2.0.dylib */,
+				9CE93CFD277C751800E77307 /* OpenGL.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +224,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CE93CD3277C734200E77307 /* main.cpp in Sources */,
+				9CE93CF5277C747F00E77307 /* Texture.cpp in Sources */,
+				9CE93CF4277C747F00E77307 /* Application.cpp in Sources */,
+				9CE93CF3277C747F00E77307 /* Renderer.cpp in Sources */,
+				9CE93CF9277C747F00E77307 /* VertexBufferLayout.cpp in Sources */,
+				9CE93CF7277C747F00E77307 /* IndexBuffer.cpp in Sources */,
+				9CE93CF8277C747F00E77307 /* VertexArray.cpp in Sources */,
+				9CE93CF6277C747F00E77307 /* Shader.cpp in Sources */,
+				9CE93CF2277C747F00E77307 /* VertexBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +353,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -249,6 +367,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.2.0_1/lib,
+					/usr/local/Cellar/glfw/3.3.6/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
