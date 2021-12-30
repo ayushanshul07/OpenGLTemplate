@@ -17,9 +17,9 @@
 #include "Texture.hpp"
 #include "Renderer.hpp"
 
-#include "../include/vendor/glm/glm.hpp"
-#include "../include/vendor/glm/gtc/matrix_transform.hpp"
-#include "../include/vendor/glm/gtc/type_ptr.hpp"
+#include "vendor/glm/glm.hpp"
+#include "vendor/glm/gtc/matrix_transform.hpp"
+#include "vendor/glm/gtc/type_ptr.hpp"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height){
     glViewport(0, 0, width, height);
@@ -65,8 +65,8 @@ int main(void)
     glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    Shader shader("/Users/ayushanshul07/OpenGLTemplate/OpenGL/assets/shaders/BasicShader.shader");
-    Texture texture("/Users/ayushanshul07/OpenGLTemplate/OpenGL/assets/textures/container.jpeg");
+    Shader shader("../assets/shaders/BasicShader.shader");
+    Texture texture("../assets/textures/container.jpeg");
 
     float vertices[] = {
             // positions // colors // texture coords
@@ -83,7 +83,7 @@ int main(void)
     
     VertexArray     VAO;
     VertexBuffer    VBO(vertices, sizeof(vertices));
-    IndexBuffer     IBO(indices, sizeof(indices));
+    IndexBuffer     IBO(indices, sizeof(indices)/sizeof(unsigned int));
     
     VertexBufferLayout layout;
     layout.Push(GL_FLOAT, 3); // for position

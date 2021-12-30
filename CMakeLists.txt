@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(webgl)
+project(OpenGLApp)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 set(CMAKE_CXX_STANDARD 11)
@@ -18,9 +18,9 @@ set(SRC_FILES
     ${CMAKE_SOURCE_DIR}/src/VertexBuffer.cpp
     ${CMAKE_SOURCE_DIR}/src/VertexBufferLayout.cpp)
 
-add_executable(webgl ${SRC_FILES})
+add_executable(App ${SRC_FILES})
 
-target_include_directories(webgl PUBLIC ${CMAKE_SOURCE_DIR}/include
+target_include_directories(App PUBLIC ${CMAKE_SOURCE_DIR}/include
                                         ${CMAKE_SOURCE_DIR}/include/vendor)
 
-target_link_libraries(webgl PUBLIC OpenGL::GL GLEW::GLEW glfw)
+target_link_libraries(App PUBLIC OpenGL::GL GLEW::GLEW glfw)
