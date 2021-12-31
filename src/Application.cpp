@@ -1,10 +1,15 @@
 #define GL_SILENCE_DEPRECATION
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten/emscripten.h>
+#endif
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
 #include <vector>
+#include <functional>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -17,10 +22,10 @@
 #include "VertexBuffer.hpp"
 #include "VertexBufferLayout.hpp"
 
+#include "glm/fwd.hpp"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
-#include "glm/fwd.hpp"
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
   glViewport(0, 0, width, height);
@@ -31,6 +36,9 @@ void processInput(GLFWwindow *window) {
     glfwSetWindowShouldClose(window, true);
   }
 }
+
+std::function<void()> loop;
+void main_loop() { loop(); }
 
 int main(void) {
   if (!glfwInit()) {
@@ -65,57 +73,66 @@ int main(void) {
   glViewport(0, 0, 800, 600);
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-  Shader shader("../assets/shaders/BasicShader.shader");
+  std::string shaderPath = "../assets/shaders/";
+#ifdef __EMSCRIPTEN__
+  shaderPath += "web/";
+#endif
+      
+  Shader shader(shaderPath + "BasicShader.shader");
   Texture texture("../assets/textures/container.jpeg");
 
- 
-float vertices[] = {
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+  float vertices[] = {
+      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+      0.5f,  -0.5f, -0.5f, 1.0f, 0.0f,
+      0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
+      0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
+      -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f,
+      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
 
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+      -0.5f, -0.5f, 0.5f,  0.0f, 0.0f,
+      0.5f,  -0.5f, 0.5f,  1.0f, 0.0f,
+      0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+      0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+      -0.5f, 0.5f,  0.5f,  0.0f, 1.0f,
+      -0.5f, -0.5f, 0.5f,  0.0f, 0.0f,
 
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+      -0.5f, 0.5f,  0.5f,  1.0f, 0.0f,
+      -0.5f, 0.5f,  -0.5f, 1.0f, 1.0f,
+      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+      -0.5f, -0.5f, 0.5f,  0.0f, 0.0f,
+      -0.5f, 0.5f,  0.5f,  1.0f, 0.0f,
 
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+      0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+      0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
+      0.5f,  -0.5f, -0.5f, 0.0f, 1.0f,
+      0.5f,  -0.5f, -0.5f, 0.0f, 1.0f,
+      0.5f,  -0.5f, 0.5f,  0.0f, 0.0f,
+      0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
 
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+      0.5f,  -0.5f, -0.5f, 1.0f, 1.0f,
+      0.5f,  -0.5f, 0.5f,  1.0f, 0.0f,
+      0.5f,  -0.5f, 0.5f,  1.0f, 0.0f,
+      -0.5f, -0.5f, 0.5f,  0.0f, 0.0f,
+      -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
 
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-};
+      -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f,
+      0.5f,  0.5f,  -0.5f, 1.0f, 1.0f,
+      0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+      0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+      -0.5f, 0.5f,  0.5f,  0.0f, 0.0f,
+      -0.5f, 0.5f,  -0.5f, 0.0f, 1.0f
+  };
 
   unsigned int indices[] = {
-      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-        19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35};
+      0,  1,  2,  3,  4,  5,
+      6,  7,  8,  9,  10, 11,
+      12, 13, 14, 15, 16, 17,
+      18, 19, 20, 21, 22, 23,
+      24, 25, 26, 27, 28, 29,
+      30, 31, 32, 33, 34, 35
+  };
 
   VertexArray VAO;
   VertexBuffer VBO(vertices, sizeof(vertices));
@@ -123,7 +140,7 @@ float vertices[] = {
 
   VertexBufferLayout layout;
   layout.Push(GL_FLOAT, 3); // for position
-  //layout.Push(GL_FLOAT, 3); // for vertex color
+  // layout.Push(GL_FLOAT, 3); // for vertex color
   layout.Push(GL_FLOAT, 2); // for texture coordinate
   VAO.AddBuffer(VBO, layout);
 
@@ -133,8 +150,7 @@ float vertices[] = {
 
   Renderer renderer;
 
-  /* Loop until the user closes the window */
-  while (!glfwWindowShouldClose(window)) {
+  loop = [&] {
     processInput(window);
 
     /* Render here */
@@ -145,11 +161,11 @@ float vertices[] = {
     glm::mat4 modelm = glm::mat4(1.0f);
     glm::mat4 viewm = glm::mat4(1.0f);
     glm::mat4 projectionm = glm::mat4(1.0f);
-    modelm =
-        glm::rotate(modelm, glm::radians(50.0f)*((float)glfwGetTime()), glm::vec3(0.5f, 1.0f, 0.0f));
+    modelm = glm::rotate(modelm, glm::radians(50.0f) * ((float)glfwGetTime()),
+                         glm::vec3(0.5f, 1.0f, 0.0f));
     viewm = glm::translate(viewm, glm::vec3(0.0f, 0.0f, -3.0f));
     projectionm =
-       glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+        glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
     shader.SetUniformMatrix4fv("model", glm::value_ptr(modelm));
     shader.SetUniformMatrix4fv("view", glm::value_ptr(viewm));
     shader.SetUniformMatrix4fv("projection", glm::value_ptr(projectionm));
@@ -162,7 +178,15 @@ float vertices[] = {
     glfwSwapBuffers(window);
     /* Poll for and process events */
     glfwPollEvents();
+  };
+
+#ifdef __EMSCRIPTEN__ /* Loop until the user closes the window */
+  emscripten_set_main_loop(main_loop, 0, true);
+#else
+  while (!glfwWindowShouldClose(window)) {
+    loop();
   }
+#endif
 
   glfwTerminate();
   return 0;
