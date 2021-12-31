@@ -25,6 +25,7 @@ if(EMSCRIPTEN)
     set(SUFFIX ".html")
     set(LIB_OPENGL GL GLEW glfw)
 else()
+    set(SUFFIX ".out")
     set(LIB_OPENGL OpenGL::GL GLEW::GLEW glfw)
 endif()
 
