@@ -28,8 +28,9 @@ cd build/
 [Source emcmake paths]
 emcmake cmake ..
 make --build .
-./App
+python3 -m http.server
 ```
+Run the generated html on the running server. Ex: localhost:8000
 
 ## Contributing
 
